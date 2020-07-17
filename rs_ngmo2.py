@@ -303,7 +303,7 @@ class Log:
         self.values = {}
         self.values = {
                 'sampling_on': self.get_pulse_state(),
-                'sample_source': self.sample_channel(),
+                'sample_channel': self.sample_channel(),
                 'sample_type': self.sample_type(),
                 'sample_interval': self.sample_interval(),
                 'sample_length': self.sample_length()}
@@ -392,7 +392,7 @@ class Log:
             self.log_data['seconds'] = np.arange(
                     0,
                     float(self.values['sample_interval'])
-                    * int(self.values['sample_interval']),
+                    * int(self.values['sample_length']),
                     float(self.values['sample_interval']))
         elif event_reg & trigger_timeout:
             print('Trigger timeout channel: ' + self._channel)
@@ -586,7 +586,7 @@ class Status:
         query = ':STAT:MEAS:COND?'
         return self._command.read(query)
 
-    def meas_enable_reg(self, reg_value):
+    def meas_enable_reg(self, reg_value=None):
         query = ':STAT:MEAS:ENAB?'
         write = ':STAT:MEAS:ENAB'
         return self._command.read_write(
@@ -600,7 +600,7 @@ class Status:
         query = ':STAT:OPER:COND?'
         return self._command.read(query)
 
-    def opr_enable_reg(self, reg_value):
+    def opr_enable_reg(self, reg_value=None):
         query = ':STAT:OPER:ENAB?'
         write = ':STAT:OPER:ENAB'
         return self._command.read_write(
@@ -614,7 +614,7 @@ class Status:
         query = ':STAT:QUES:COND?'
         return self._command.read(query)
 
-    def ques_enable_reg(self, reg_value):
+    def ques_enable_reg(self, reg_value=None):
         query = ':STAT:QUES:ENAB?'
         write = ':STAT:QUES:ENAB'
         return self._command.read_write(
