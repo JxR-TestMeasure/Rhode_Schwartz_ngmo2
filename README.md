@@ -1,1 +1,1 @@
-# Rhode_Schwartz_ngmo2
+Python instrument driver for the Rhode & Schwarz NGMOx series power supply
